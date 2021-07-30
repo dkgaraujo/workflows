@@ -1,0 +1,17 @@
+> workflow
+== Workflow ====================================================================
+Preprocessor: Formula
+Model: linear_reg()
+
+-- Preprocessor ----------------------------------------------------------------
+mpg ~ .
+
+-- Case Weights ----------------------------------------------------------------
+disp
+
+-- Model -----------------------------------------------------------------------
+Linear Regression Model Specification (regression)
+
+Computational engine: lm 
+
+

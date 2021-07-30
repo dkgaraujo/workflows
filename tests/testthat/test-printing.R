@@ -90,3 +90,28 @@ test_that("can print workflow with >10 recipe steps", {
     add_recipe(workflow(), rec)
   )
 })
+
+test_that("can print workflow with just case weights", {
+  workflow <- workflow()
+  workflow <- add_case_weights(workflow, disp)
+
+  verify_output(
+    test_path("out/test-print-workflow-case-weights.txt"),
+    workflow
+  )
+})
+
+test_that("can print workflow with case weights, preprocessor, and model", {
+  model <- parsnip::linear_reg()
+  model <- parsnip::set_engine(model, "lm")
+
+  workflow <- workflow()
+  workflow <- add_formula(workflow, mpg ~ .)
+  workflow <- add_case_weights(workflow, disp)
+  workflow <- add_model(workflow, model)
+
+  verify_output(
+    test_path("out/test-print-workflow-case-weights-with-preprocessor-and-model.txt"),
+    workflow
+  )
+})

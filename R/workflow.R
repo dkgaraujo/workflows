@@ -181,6 +181,7 @@ set_trained <- function(x, value) {
 print.workflow <- function(x, ...) {
   print_header(x)
   print_preprocessor(x)
+  print_case_weights(x)
   print_model(x)
   # print_postprocessor(x)
   invisible(x)
@@ -224,6 +225,26 @@ print_header <- function(x) {
 
   spec_msg <- glue::glue("{spec_msg} {spec}")
   cat_line(spec_msg)
+
+  invisible(x)
+}
+
+print_case_weights <- function(x) {
+  if (!has_case_weights(x)) {
+    return(invisible(x))
+  }
+
+  # Space between Workflow / Preprocessor section and Case Weights section
+  cat_line("")
+
+  header <- cli::rule("Case Weights")
+  cat_line(header)
+
+  col <- extract_case_weights_col(x)
+  col <- quo_get_expr(col)
+  col <- expr_text(col)
+
+  cat_line(col)
 
   invisible(x)
 }
@@ -347,7 +368,7 @@ print_model <- function(x) {
 
   has_fit <- has_fit(x)
 
-  # Space between Workflow/Preprocessor section and Model section
+  # Space between Workflow/Preprocessor/Case Weights section and Model section
   cat_line("")
 
   header <- cli::rule("Model")
