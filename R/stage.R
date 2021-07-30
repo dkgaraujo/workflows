@@ -1,13 +1,22 @@
-new_stage_pre <- function(actions = list(), mold = NULL) {
-  if (!is.null(mold) && !is.list(mold)) {
+new_stage_pre <- function(actions = list(), mold = NULL, case_weights = NULL) {
+  if (!is_null(mold) && !is_list(mold)) {
     abort("`mold` must be a result of calling `hardhat::mold()`.")
   }
 
-  new_stage(actions = actions, mold = mold, subclass = "stage_pre")
+  if (!is_null(case_weights) && !is_integer(case_weights) && !is_double(case_weights)) {
+    abort("`case_weights` must be an integer or double vector.")
+  }
+
+  new_stage(
+    actions = actions,
+    mold = mold,
+    case_weights = case_weights,
+    subclass = "stage_pre"
+  )
 }
 
 new_stage_fit <- function(actions = list(), fit = NULL) {
-  if (!is.null(fit) && !is_model_fit(fit)) {
+  if (!is_null(fit) && !is_model_fit(fit)) {
     abort("`fit` must be a `model_fit`.")
   }
 

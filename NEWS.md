@@ -1,5 +1,9 @@
 # workflows (development version)
 
+* New `add_case_weights()`, `update_case_weights()`, and `remove_case_weights()`
+  for specifying a column to use as case weights which will be passed on to the
+  underlying parsnip model.
+
 * `add_model()` and `update_model()` now use `...` to separate the required
   arguments from the optional arguments, forcing optional arguments to be
   named. This change was made to make it easier for us to extend these functions
